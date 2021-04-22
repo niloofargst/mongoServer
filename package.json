@@ -1,0 +1,42 @@
+{
+  "name": "mongo-server",
+  "version": "1.0.0",
+  "description": "Upgrade NodeJS with MongoDB",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon",
+    "build": "webpack --mode=production",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/niloofargst/mongoServer.git"
+  },
+  "keywords": [
+    "node",
+    "server"
+  ],
+  "author": "Niloufar Ghesmati",
+  "license": "ISC",
+  "bugs": {
+    "url": "git+https://github.com/niloofargst/mongoServer.git"
+  },
+  "homepage": "https://github.com/niloofargst/mongoServer#readme",
+  "dependencies": {
+    "babel-core": "^6.26.3",
+    "babel-loader": "^7.1.5",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-stage-2": "^6.24.1",
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "helmet": "^4.5.0",
+    "lodash": "^4.17.21",
+    "mongoose": "^5.12.5"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.7",
+    "webpack": "^5.34.0",
+    "webpack-cli": "^4.6.0",
+    "webpack-node-externals": "^2.5.2"
+  }
+}
