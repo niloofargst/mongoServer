@@ -1,13 +1,14 @@
 import _ from 'lodash';
-import Student from '../models/student.model'
+import Student from '../models/student.model';
 
 const create = (req, res) => {
     const student = Student(req.body);
     student.save((err, data) => {
         if (err) {
             return res.status(400).json(err.message);
+        } else {
+            res.status(201).json(data);
         }
-        res.status(201).json(data);
     });
 }
 
@@ -15,8 +16,9 @@ const list = (req, res) => {
     Student.find((err, data) => {
         if (err) {
             return res.status(400).json(err.message);
+        } else {
+            res.status(200).json(data);
         }
-        res.status(200).json(data);
     });
 }
 
@@ -25,8 +27,9 @@ const read = (req, res) => {
     Student.findById(id).exec((err, data) => {
         if (err) {
             return res.status(400).json(err.message);
+        } else {
+            res.status(200).json(data);
         }
-        res.status(200).json(data);
     });
 }
 
@@ -34,15 +37,17 @@ const update = (req, res) => {
     const id = req.params.id;
     Student.findById(id).exec((err, data) => {
         if (err || !data) {
-            return res.status(400).json('Student not found!');
+            return res.status(400).json('Student not found');
+        } else {
+            const student = _.extend(data, req.body);
+            student.save((err, data) => {
+                if (err) {
+                    return res.status(400).json(err.message);
+                } else {
+                    res.status(200).json(data);
+                }
+            });
         }
-        const student = _extend(data, req.body);
-        student.save((err, data) => {
-            if (err) {
-                return res.status(400).json(err.message);
-            }
-            res.status(200).json(data);
-        })
     });
 }
 
@@ -50,15 +55,17 @@ const remove = (req, res) => {
     const id = req.params.id;
     Student.findById(id).exec((err, data) => {
         if (err || !data) {
-            return res.status(400).json('Student not found!');
+            return res.status(400).json('Student not found');
+        } else {
+            data.remove((err, data) => {
+                if (err) {
+                    return res.status(400).json(err.message);
+                } else {
+                    res.status(200).json('Student deleted.');
+                }
+            });
         }
-        data.remove((err, data) => {
-            if (err) {
-                return res.status(400).json(err.message);
-            }
-            res.status(200).json('Student deleted.');
-        });
-    })
+    });
 }
 
 export default { create, list, read, update, remove }
